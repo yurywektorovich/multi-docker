@@ -6,7 +6,7 @@ before_install:
   - docker build -t yurywektorovich/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run yurywektorovich/react-test npm test -- --coverage
+  - docker run -e CI=true yurywektorovich/react-test npm test
 
 after_success:
   - docker build -t yurywektorovich/multi-client ./client
@@ -20,3 +20,5 @@ after_success:
   - docker push yurywektorovich/multi-nginx
   - docker push yurywektorovich/multi-server
   - docker push yurywektorovich/multi-worker
+
+language: generic
